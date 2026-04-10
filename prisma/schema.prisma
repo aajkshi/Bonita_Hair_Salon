@@ -1,0 +1,326 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Staff {
+  id           String   @id @default(cuid())
+  name         String
+  role         String
+  phone        String?
+  email        String?  @unique
+  passwordHash String?
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  bookings               Booking[]
+  ordersAsStaff          Order[]               @relation("OrderStaff")
+  ordersAsCreator        Order[]               @relation("OrderCreator")
+  orderServiceItems      OrderServiceItem[]
+  scheduleTemplates      ScheduleTemplate[]
+  scheduleOverrides      ScheduleOverride[]
+  news                   News[]
+  auditLogs              AuditLog[]
+  notificationRecipients NotificationRecipient[]
+
+  @@map("staffs")
+}
+
+model Customer {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String   @unique
+  email     String?
+  gender    String?
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  bookings Booking[]
+  orders   Order[]
+
+  @@map("customers")
+}
+
+model ServiceCategory {
+  id        String   @id @default(cuid())
+  name      String
+  sortOrder Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  serviceItems ServiceItem[]
+
+  @@map("service_categories")
+}
+
+model ServiceItem {
+  id         String   @id @default(cuid())
+  categoryId String
+  name       String
+  isBookable Boolean  @default(true)
+  isActive   Boolean  @default(true)
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  category ServiceCategory @relation(fields: [categoryId], references: [id])
+  variants ServiceVariant[]
+
+  @@map("service_items")
+}
+
+model ServiceVariant {
+  id              String   @id @default(cuid())
+  serviceItemId   String
+  hairLength      String?
+  durationMinutes Int
+  price           Int
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  serviceItem       ServiceItem        @relation(fields: [serviceItemId], references: [id])
+  bookingItems      BookingItem[]
+  orderServiceItems OrderServiceItem[]
+
+  @@map("service_variants")
+}
+
+model Product {
+  id            String   @id @default(cuid())
+  name          String
+  brand         String?
+  price         Int
+  stockQuantity Int      @default(0)
+  isOnSale      Boolean  @default(true)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  orderProductItems OrderProductItem[]
+
+  @@map("products")
+}
+
+model ScheduleTemplate {
+  id           String   @id @default(cuid())
+  staffId      String
+  dayOfWeek    Int
+  startTime    String
+  endTime      String
+  slotInterval Int      @default(30)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  staff Staff @relation(fields: [staffId], references: [id])
+
+  @@map("schedule_templates")
+}
+
+model ScheduleOverride {
+  id          String   @id @default(cuid())
+  staffId     String
+  date        String
+  startTime   String?
+  endTime     String?
+  isAvailable Boolean
+  reason      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  staff Staff @relation(fields: [staffId], references: [id])
+
+  @@map("schedule_overrides")
+}
+
+model Booking {
+  id              String    @id @default(cuid())
+  bookingNo       String    @unique
+  customerId      String
+  staffId         String
+  bookingDate     String
+  startTime       String
+  endTime         String
+  totalDuration   Int
+  estimatedAmount Int?
+  status          String    @default("PENDING")
+  rescheduledFrom String?
+  customerNote    String?
+  adminNote       String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  cancelledAt     DateTime?
+
+  customer      Customer          @relation(fields: [customerId], references: [id])
+  staff         Staff             @relation(fields: [staffId], references: [id])
+  items         BookingItem[]
+  orders        Order[]
+  notifications NotificationLog[]
+
+  @@map("bookings")
+}
+
+model BookingItem {
+  id               String   @id @default(cuid())
+  bookingId        String
+  serviceVariantId String
+  serviceName      String
+  categoryName     String
+  hairLength       String?
+  durationMinutes  Int
+  price            Int
+  createdAt        DateTime @default(now())
+
+  booking        Booking        @relation(fields: [bookingId], references: [id])
+  serviceVariant ServiceVariant @relation(fields: [serviceVariantId], references: [id])
+
+  @@map("booking_items")
+}
+
+model Order {
+  id              String    @id @default(cuid())
+  orderNo         String    @unique
+  bookingId       String?
+  customerId      String
+  staffId         String
+  orderDate       String
+  serviceSubtotal Int       @default(0)
+  productSubtotal Int       @default(0)
+  discountAmount  Int       @default(0)
+  totalAmount     Int       @default(0)
+  paymentMethod   String?
+  status          String    @default("OPEN")
+  voidedReason    String?
+  voidedBy        String?
+  settledAt       DateTime?
+  createdBy       String
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  booking      Booking?           @relation(fields: [bookingId], references: [id])
+  customer     Customer           @relation(fields: [customerId], references: [id])
+  staff        Staff              @relation("OrderStaff", fields: [staffId], references: [id])
+  creator      Staff              @relation("OrderCreator", fields: [createdBy], references: [id])
+  serviceItems OrderServiceItem[]
+  productItems OrderProductItem[]
+
+  @@map("orders")
+}
+
+model OrderServiceItem {
+  id               String   @id @default(cuid())
+  orderId          String
+  serviceVariantId String?
+  serviceName      String
+  categoryName     String
+  hairLength       String?
+  durationMinutes  Int
+  unitPrice        Int
+  discount         Int      @default(0)
+  subtotal         Int
+  performedBy      String?
+  notes            String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  order          Order           @relation(fields: [orderId], references: [id])
+  serviceVariant ServiceVariant? @relation(fields: [serviceVariantId], references: [id])
+  performer      Staff?          @relation(fields: [performedBy], references: [id])
+
+  @@map("order_service_items")
+}
+
+model OrderProductItem {
+  id          String   @id @default(cuid())
+  orderId     String
+  productId   String?
+  productName String
+  brand       String?
+  quantity    Int      @default(1)
+  unitPrice   Int
+  discount    Int      @default(0)
+  subtotal    Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  order   Order    @relation(fields: [orderId], references: [id])
+  product Product? @relation(fields: [productId], references: [id])
+
+  @@map("order_product_items")
+}
+
+model News {
+  id          String    @id @default(cuid())
+  title       String
+  content     String
+  coverImage  String?
+  isPublished Boolean   @default(false)
+  publishedAt DateTime?
+  createdBy   String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  author Staff @relation(fields: [createdBy], references: [id])
+
+  @@map("news")
+}
+
+model NotificationLog {
+  id               String    @id @default(cuid())
+  type             String
+  channel          String
+  recipientEmail   String?
+  recipientName    String?
+  relatedBookingId String?
+  subject          String?
+  body             String?
+  status           String    @default("PENDING")
+  errorMessage     String?
+  retryCount       Int       @default(0)
+  sentAt           DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  relatedBooking Booking? @relation(fields: [relatedBookingId], references: [id])
+
+  @@map("notification_logs")
+}
+
+model NotificationRecipient {
+  id        String   @id @default(cuid())
+  staffId   String
+  channel   String
+  address   String
+  notifyOn  String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  staff Staff @relation(fields: [staffId], references: [id])
+
+  @@map("notification_recipients")
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  staffId    String?
+  action     String
+  entityType String
+  entityId   String
+  oldValues  String?
+  newValues  String?
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+
+  staff Staff? @relation(fields: [staffId], references: [id])
+
+  @@map("audit_logs")
+}
