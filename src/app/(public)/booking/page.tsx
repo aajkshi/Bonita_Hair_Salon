@@ -259,7 +259,7 @@ export default function BookingPage() {
                       ? "bg-rose-500 text-white"
                       : i === step
                         ? "bg-rose-500 text-white"
-                        : "bg-neutral-100 text-muted-foreground"
+                        : "bg-muted text-muted-foreground"
                   }`}
                 >
                   {i < step ? <Check className="h-4 w-4" /> : i + 1}
@@ -271,7 +271,7 @@ export default function BookingPage() {
               {i < STEPS.length - 1 && (
                 <div
                   className={`mx-2 h-0.5 flex-1 transition-colors ${
-                    i < step ? "bg-rose-500" : "bg-neutral-200"
+                    i < step ? "bg-rose-500" : "bg-border"
                   }`}
                 />
               )}
@@ -316,7 +316,7 @@ export default function BookingPage() {
                                 }
                                 className={`flex flex-col rounded-lg border p-3 text-left text-sm transition-colors ${
                                   selected
-                                    ? "border-rose-500 bg-rose-50"
+                                    ? "border-rose-500 bg-rose-500/10"
                                     : "hover:border-rose-300"
                                 }`}
                               >
@@ -348,7 +348,7 @@ export default function BookingPage() {
 
           {/* Selected summary */}
           {selectedServices.length > 0 && (
-            <Card className="border-rose-200 bg-rose-50/50">
+            <Card className="border-rose-200 dark:border-rose-500/30 bg-rose-500/5">
               <CardHeader className="pb-3">
                 <CardTitle className="text-base">已選擇的服務</CardTitle>
               </CardHeader>
@@ -521,7 +521,7 @@ export default function BookingPage() {
         <Card>
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-rose-100">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-rose-500/10">
                 <Scissors className="h-5 w-5 text-rose-500" />
               </div>
               <div>

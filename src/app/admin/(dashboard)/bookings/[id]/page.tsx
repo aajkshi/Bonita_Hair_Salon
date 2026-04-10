@@ -26,16 +26,16 @@ import { BookingStatusActions } from "./status-actions";
 
 function statusColor(status: string) {
   const map: Record<string, string> = {
-    PENDING: "bg-yellow-100 text-yellow-800",
-    CONFIRMED: "bg-blue-100 text-blue-800",
-    ARRIVED: "bg-purple-100 text-purple-800",
-    COMPLETED: "bg-green-100 text-green-800",
-    CANCELLED: "bg-red-100 text-red-800",
-    REJECTED: "bg-red-100 text-red-800",
-    RESCHEDULED: "bg-orange-100 text-orange-800",
-    EXPIRED: "bg-neutral-100 text-neutral-800",
+    PENDING: "bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border border-yellow-500/30",
+    CONFIRMED: "bg-blue-500/20 text-blue-600 dark:text-blue-400 border border-blue-500/30",
+    ARRIVED: "bg-purple-500/20 text-purple-600 dark:text-purple-400 border border-purple-500/30",
+    COMPLETED: "bg-green-500/20 text-green-600 dark:text-green-400 border border-green-500/30",
+    CANCELLED: "bg-red-500/20 text-red-600 dark:text-red-400 border border-red-500/30",
+    REJECTED: "bg-red-500/20 text-red-600 dark:text-red-400 border border-red-500/30",
+    RESCHEDULED: "bg-orange-500/20 text-orange-600 dark:text-orange-400 border border-orange-500/30",
+    EXPIRED: "bg-neutral-500/20 text-neutral-600 dark:text-neutral-400 border border-neutral-500/30",
   };
-  return map[status] ?? "bg-neutral-100 text-neutral-800";
+  return map[status] ?? "bg-neutral-500/20 text-neutral-600 dark:text-neutral-400";
 }
 
 export default async function BookingDetailPage({
@@ -63,7 +63,7 @@ export default async function BookingDetailPage({
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <Link href="/admin/bookings" className="text-sm text-neutral-500 hover:underline">
+          <Link href="/admin/bookings" className="text-sm text-muted-foreground hover:underline">
             &larr; 返回預約列表
           </Link>
           <h1 className="mt-1 text-2xl font-bold">預約詳情 {booking.bookingNo}</h1>
@@ -81,7 +81,7 @@ export default async function BookingDetailPage({
           <CardContent className="space-y-3">
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
-                <span className="text-neutral-500">顧客</span>
+                <span className="text-muted-foreground">顧客</span>
                 <p className="font-medium">
                   <Link
                     href={`/admin/customers/${booking.customerId}`}
@@ -92,30 +92,30 @@ export default async function BookingDetailPage({
                 </p>
               </div>
               <div>
-                <span className="text-neutral-500">電話</span>
+                <span className="text-muted-foreground">電話</span>
                 <p className="font-medium">{booking.customer.phone}</p>
               </div>
               <div>
-                <span className="text-neutral-500">設計師</span>
+                <span className="text-muted-foreground">設計師</span>
                 <p className="font-medium">{booking.staff.name}</p>
               </div>
               <div>
-                <span className="text-neutral-500">日期</span>
+                <span className="text-muted-foreground">日期</span>
                 <p className="font-medium">{booking.bookingDate}</p>
               </div>
               <div>
-                <span className="text-neutral-500">時段</span>
+                <span className="text-muted-foreground">時段</span>
                 <p className="font-medium font-mono">
                   {booking.startTime} - {booking.endTime}
                 </p>
               </div>
               <div>
-                <span className="text-neutral-500">總時長</span>
+                <span className="text-muted-foreground">總時長</span>
                 <p className="font-medium">{booking.totalDuration} 分鐘</p>
               </div>
               {booking.estimatedAmount && (
                 <div>
-                  <span className="text-neutral-500">預估金額</span>
+                  <span className="text-muted-foreground">預估金額</span>
                   <p className="font-medium">${booking.estimatedAmount.toLocaleString()}</p>
                 </div>
               )}
@@ -124,14 +124,14 @@ export default async function BookingDetailPage({
               <>
                 <Separator />
                 <div>
-                  <span className="text-sm text-neutral-500">顧客備註</span>
+                  <span className="text-sm text-muted-foreground">顧客備註</span>
                   <p className="text-sm">{booking.customerNote}</p>
                 </div>
               </>
             )}
             {booking.adminNote && (
               <div>
-                <span className="text-sm text-neutral-500">管理員備註</span>
+                <span className="text-sm text-muted-foreground">管理員備註</span>
                 <p className="text-sm">{booking.adminNote}</p>
               </div>
             )}
@@ -186,7 +186,7 @@ export default async function BookingDetailPage({
             <div className="mt-4 pt-4 border-t">
               <Link
                 href={`/admin/orders/new?bookingId=${booking.id}`}
-                className="rounded-md bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800"
+                className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
               >
                 建立消費紀錄
               </Link>
@@ -194,7 +194,7 @@ export default async function BookingDetailPage({
           )}
           {booking.orders.length > 0 && (
             <div className="mt-4 pt-4 border-t space-y-1">
-              <p className="text-sm font-medium text-neutral-700">關聯消費紀錄</p>
+              <p className="text-sm font-medium text-foreground">關聯消費紀錄</p>
               {booking.orders.map((order) => (
                 <Link
                   key={order.id}

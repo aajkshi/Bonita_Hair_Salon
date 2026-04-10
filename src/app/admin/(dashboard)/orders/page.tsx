@@ -17,11 +17,19 @@ import Link from "next/link";
 
 function statusColor(status: string) {
   const map: Record<string, string> = {
-    OPEN: "bg-yellow-100 text-yellow-800",
-    SETTLED: "bg-green-100 text-green-800",
-    VOIDED: "bg-red-100 text-red-800",
+    PENDING: "bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border border-yellow-500/30",
+    CONFIRMED: "bg-blue-500/20 text-blue-600 dark:text-blue-400 border border-blue-500/30",
+    ARRIVED: "bg-purple-500/20 text-purple-600 dark:text-purple-400 border border-purple-500/30",
+    COMPLETED: "bg-green-500/20 text-green-600 dark:text-green-400 border border-green-500/30",
+    CANCELLED: "bg-red-500/20 text-red-600 dark:text-red-400 border border-red-500/30",
+    REJECTED: "bg-red-500/20 text-red-600 dark:text-red-400 border border-red-500/30",
+    RESCHEDULED: "bg-orange-500/20 text-orange-600 dark:text-orange-400 border border-orange-500/30",
+    EXPIRED: "bg-neutral-500/20 text-neutral-600 dark:text-neutral-400 border border-neutral-500/30",
+    OPEN: "bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border border-yellow-500/30",
+    SETTLED: "bg-green-500/20 text-green-600 dark:text-green-400 border border-green-500/30",
+    VOIDED: "bg-red-500/20 text-red-600 dark:text-red-400 border border-red-500/30",
   };
-  return map[status] ?? "bg-neutral-100 text-neutral-800";
+  return map[status] ?? "bg-neutral-500/20 text-neutral-600 dark:text-neutral-400";
 }
 
 export default async function OrdersPage() {

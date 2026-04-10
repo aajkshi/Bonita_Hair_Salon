@@ -96,7 +96,7 @@ export default async function ServicesPage() {
                         {item.isBookable && (
                           <Badge
                             variant="secondary"
-                            className="shrink-0 bg-rose-50 text-rose-600"
+                            className="shrink-0 bg-rose-500/10 text-rose-600 dark:text-rose-400"
                           >
                             可預約
                           </Badge>

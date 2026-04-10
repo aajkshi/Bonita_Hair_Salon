@@ -30,7 +30,7 @@ export default async function ServicesPage() {
 
       {categories.length === 0 ? (
         <Card>
-          <CardContent className="py-8 text-center text-neutral-500">
+          <CardContent className="py-8 text-center text-muted-foreground">
             尚未建立服務類別
           </CardContent>
         </Card>
@@ -47,7 +47,7 @@ export default async function ServicesPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               {cat.serviceItems.length === 0 ? (
-                <p className="text-sm text-neutral-500">此類別下尚無服務項目</p>
+                <p className="text-sm text-muted-foreground">此類別下尚無服務項目</p>
               ) : (
                 cat.serviceItems.map((item) => (
                   <div key={item.id} className="rounded-lg border p-4">
@@ -68,7 +68,7 @@ export default async function ServicesPage() {
                       <div className="overflow-x-auto">
                         <table className="w-full text-sm">
                           <thead>
-                            <tr className="border-b text-left text-neutral-500">
+                            <tr className="border-b text-left text-muted-foreground">
                               <th className="pb-2 pr-4">髮長</th>
                               <th className="pb-2 pr-4">時長</th>
                               <th className="pb-2 pr-4 text-right">價格</th>
@@ -91,8 +91,8 @@ export default async function ServicesPage() {
                                   <span
                                     className={`text-xs ${
                                       v.isActive
-                                        ? "text-green-600"
-                                        : "text-neutral-400"
+                                        ? "text-green-600 dark:text-green-400"
+                                        : "text-muted-foreground"
                                     }`}
                                   >
                                     {v.isActive ? "啟用" : "停用"}

@@ -103,7 +103,7 @@ export function ServiceActions({ categories }: { categories: Category[] }) {
   return (
     <div className="flex gap-2">
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger className="inline-flex items-center justify-center rounded-md border border-neutral-300 bg-white px-3 py-1.5 text-sm font-medium hover:bg-neutral-50">
+        <DialogTrigger className="inline-flex items-center justify-center rounded-md border border-input bg-background px-3 py-1.5 text-sm font-medium text-foreground hover:bg-muted/50">
           <Plus className="mr-1 h-4 w-4" />
           新增類別
         </DialogTrigger>
@@ -129,7 +129,7 @@ export function ServiceActions({ categories }: { categories: Category[] }) {
       </Dialog>
 
       <Dialog open={itemOpen} onOpenChange={setItemOpen}>
-        <DialogTrigger className="inline-flex items-center justify-center rounded-md bg-neutral-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-neutral-800">
+        <DialogTrigger className="inline-flex items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90">
           <Plus className="mr-1 h-4 w-4" />
           新增服務
         </DialogTrigger>
@@ -145,7 +145,7 @@ export function ServiceActions({ categories }: { categories: Category[] }) {
                 onChange={(e) =>
                   setItemForm({ ...itemForm, categoryId: e.target.value })
                 }
-                className="block w-full rounded-md border border-neutral-300 px-3 py-2 text-sm"
+                className="block w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                 required
               >
                 <option value="">請選擇...</option>

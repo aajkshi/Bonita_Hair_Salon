@@ -60,7 +60,7 @@ export default async function SchedulesPage() {
         </CardHeader>
         <CardContent>
           {Object.keys(templatesByStaff).length === 0 ? (
-            <p className="text-sm text-neutral-500">尚未設定排班</p>
+            <p className="text-sm text-muted-foreground">尚未設定排班</p>
           ) : (
             <div className="space-y-6">
               {Object.entries(templatesByStaff).map(([staffId, data]) => (
@@ -69,7 +69,7 @@ export default async function SchedulesPage() {
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm border">
                       <thead>
-                        <tr className="border-b bg-neutral-50">
+                        <tr className="border-b bg-muted/50">
                           {DAY_NAMES.map((d, i) => (
                             <th key={i} className="px-3 py-2 text-center font-medium">
                               {d}
@@ -89,12 +89,12 @@ export default async function SchedulesPage() {
                                       {tmpl.startTime}-{tmpl.endTime}
                                     </span>
                                     <br />
-                                    <span className="text-xs text-neutral-500">
+                                    <span className="text-xs text-muted-foreground">
                                       {tmpl.slotInterval}分一段
                                     </span>
                                   </div>
                                 ) : (
-                                  <span className="text-neutral-400 text-xs">休息</span>
+                                  <span className="text-muted-foreground text-xs">休息</span>
                                 )}
                               </td>
                             );
@@ -116,7 +116,7 @@ export default async function SchedulesPage() {
         </CardHeader>
         <CardContent>
           {overrides.length === 0 ? (
-            <p className="text-sm text-neutral-500">尚無特殊日期設定</p>
+            <p className="text-sm text-muted-foreground">尚無特殊日期設定</p>
           ) : (
             <Table>
               <TableHeader>

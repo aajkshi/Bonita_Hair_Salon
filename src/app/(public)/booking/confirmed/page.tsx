@@ -22,7 +22,7 @@ export default async function BookingConfirmedPage({
     <div className="mx-auto max-w-lg px-4 py-24">
       <Card className="text-center">
         <CardHeader className="pb-4">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10">
             <CheckCircle className="h-8 w-8 text-green-600" />
           </div>
           <CardTitle className="text-2xl">預約成功！</CardTitle>
@@ -32,7 +32,7 @@ export default async function BookingConfirmedPage({
         </CardHeader>
         <CardContent className="space-y-6">
           {bookingNo && (
-            <div className="rounded-lg bg-neutral-50 p-4">
+            <div className="rounded-lg bg-muted/50 p-4">
               <p className="text-sm text-muted-foreground">預約編號</p>
               <p className="mt-1 text-xl font-bold tracking-wider">
                 {bookingNo}

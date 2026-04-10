@@ -57,7 +57,7 @@ export default function ContactPage() {
           <Card key={info.title}>
             <CardHeader className="pb-3">
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-rose-50 text-rose-500">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-rose-500/10 text-rose-500">
                   <info.icon className="h-5 w-5" />
                 </div>
                 <CardTitle className="text-base">{info.title}</CardTitle>
@@ -79,7 +79,7 @@ export default function ContactPage() {
       <section>
         <h2 className="mb-6 text-2xl font-bold">交通指引</h2>
         <div className="overflow-hidden rounded-lg border">
-          <div className="flex h-80 items-center justify-center bg-gradient-to-br from-neutral-100 to-neutral-50 text-muted-foreground">
+          <div className="flex h-80 items-center justify-center bg-gradient-to-br from-muted to-muted/50 text-muted-foreground">
             <div className="text-center">
               <MapPin className="mx-auto mb-3 h-10 w-10 text-rose-300" />
               <p className="text-lg font-medium">台北市大安區幸福路 123 號</p>

@@ -57,13 +57,13 @@ export function BookingStatusActions({
   }
 
   if (allowedTransitions.length === 0) {
-    return <p className="text-sm text-neutral-500">此預約已無可執行的狀態變更</p>;
+    return <p className="text-sm text-muted-foreground">此預約已無可執行的狀態變更</p>;
   }
 
   return (
     <div className="space-y-4">
       <div className="space-y-2">
-        <label className="text-sm font-medium text-neutral-700">管理員備註</label>
+        <label className="text-sm font-medium text-foreground">管理員備註</label>
         <Textarea
           value={note}
           onChange={(e) => setNote(e.target.value)}

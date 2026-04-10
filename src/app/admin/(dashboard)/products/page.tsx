@@ -42,7 +42,7 @@ export default async function ProductsPage() {
             <TableBody>
               {products.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center text-neutral-500 py-8">
+                  <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
                     尚無產品
                   </TableCell>
                 </TableRow>

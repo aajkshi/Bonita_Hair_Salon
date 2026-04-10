@@ -26,17 +26,19 @@ import { CustomerEditForm } from "./edit-form";
 
 function statusColor(status: string) {
   const map: Record<string, string> = {
-    PENDING: "bg-yellow-100 text-yellow-800",
-    CONFIRMED: "bg-blue-100 text-blue-800",
-    ARRIVED: "bg-purple-100 text-purple-800",
-    COMPLETED: "bg-green-100 text-green-800",
-    CANCELLED: "bg-red-100 text-red-800",
-    REJECTED: "bg-red-100 text-red-800",
-    OPEN: "bg-yellow-100 text-yellow-800",
-    SETTLED: "bg-green-100 text-green-800",
-    VOIDED: "bg-red-100 text-red-800",
+    PENDING: "bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border border-yellow-500/30",
+    CONFIRMED: "bg-blue-500/20 text-blue-600 dark:text-blue-400 border border-blue-500/30",
+    ARRIVED: "bg-purple-500/20 text-purple-600 dark:text-purple-400 border border-purple-500/30",
+    COMPLETED: "bg-green-500/20 text-green-600 dark:text-green-400 border border-green-500/30",
+    CANCELLED: "bg-red-500/20 text-red-600 dark:text-red-400 border border-red-500/30",
+    REJECTED: "bg-red-500/20 text-red-600 dark:text-red-400 border border-red-500/30",
+    RESCHEDULED: "bg-orange-500/20 text-orange-600 dark:text-orange-400 border border-orange-500/30",
+    EXPIRED: "bg-neutral-500/20 text-neutral-600 dark:text-neutral-400 border border-neutral-500/30",
+    OPEN: "bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border border-yellow-500/30",
+    SETTLED: "bg-green-500/20 text-green-600 dark:text-green-400 border border-green-500/30",
+    VOIDED: "bg-red-500/20 text-red-600 dark:text-red-400 border border-red-500/30",
   };
-  return map[status] ?? "bg-neutral-100 text-neutral-800";
+  return map[status] ?? "bg-neutral-500/20 text-neutral-600 dark:text-neutral-400";
 }
 
 export default async function CustomerDetailPage({
@@ -98,7 +100,7 @@ export default async function CustomerDetailPage({
   return (
     <div className="space-y-6">
       <div>
-        <Link href="/admin/customers" className="text-sm text-neutral-500 hover:underline">
+        <Link href="/admin/customers" className="text-sm text-muted-foreground hover:underline">
           &larr; 返回顧客列表
         </Link>
         <h1 className="mt-1 text-2xl font-bold">{customer.name}</h1>
@@ -107,19 +109,19 @@ export default async function CustomerDetailPage({
       <div className="grid gap-4 sm:grid-cols-4">
         <Card>
           <CardContent className="pt-6">
-            <p className="text-sm text-neutral-500">到店次數</p>
+            <p className="text-sm text-muted-foreground">到店次數</p>
             <p className="text-2xl font-bold">{totalVisits}</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <p className="text-sm text-neutral-500">累計消費</p>
+            <p className="text-sm text-muted-foreground">累計消費</p>
             <p className="text-2xl font-bold">${totalSpent.toLocaleString()}</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <p className="text-sm text-neutral-500">常用服務</p>
+            <p className="text-sm text-muted-foreground">常用服務</p>
             <p className="text-sm font-medium mt-1">
               {favoriteServices.length > 0 ? favoriteServices.join("、") : "-"}
             </p>
@@ -127,7 +129,7 @@ export default async function CustomerDetailPage({
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <p className="text-sm text-neutral-500">最近到店</p>
+            <p className="text-sm text-muted-foreground">最近到店</p>
             <p className="text-2xl font-bold">{lastVisit}</p>
           </CardContent>
         </Card>
@@ -169,7 +171,7 @@ export default async function CustomerDetailPage({
                 <TableBody>
                   {customer.bookings.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={6} className="text-center text-neutral-500 py-8">
+                      <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
                         無預約紀錄
                       </TableCell>
                     </TableRow>
@@ -223,7 +225,7 @@ export default async function CustomerDetailPage({
                 <TableBody>
                   {customer.orders.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={6} className="text-center text-neutral-500 py-8">
+                      <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
                         無消費紀錄
                       </TableCell>
                     </TableRow>
@@ -273,7 +275,7 @@ export default async function CustomerDetailPage({
                 <TableBody>
                   {allProducts.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={7} className="text-center text-neutral-500 py-8">
+                      <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
                         無產品購買紀錄
                       </TableCell>
                     </TableRow>

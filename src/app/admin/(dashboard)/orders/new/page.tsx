@@ -274,7 +274,7 @@ export default function NewOrderPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <p className="text-neutral-500">載入中...</p>
+        <p className="text-muted-foreground">載入中...</p>
       </div>
     );
   }
@@ -300,12 +300,12 @@ export default function NewOrderPage() {
               }}
             />
             {customerResults.length > 0 && !selectedCustomer && (
-              <div className="rounded-md border border-neutral-200 bg-white shadow-sm">
+              <div className="rounded-md border border-input bg-background shadow-sm">
                 {customerResults.map((c) => (
                   <button
                     key={c.id}
                     type="button"
-                    className="flex w-full items-center gap-2 px-3 py-2 text-sm hover:bg-neutral-50 text-left"
+                    className="flex w-full items-center gap-2 px-3 py-2 text-sm hover:bg-muted/50 text-left"
                     onClick={() => {
                       setSelectedCustomer(c);
                       setCustomerId(c.id);
@@ -314,7 +314,7 @@ export default function NewOrderPage() {
                     }}
                   >
                     <span className="font-medium">{c.name}</span>
-                    <span className="text-neutral-500">{c.phone}</span>
+                    <span className="text-muted-foreground">{c.phone}</span>
                   </button>
                 ))}
               </div>
@@ -339,7 +339,7 @@ export default function NewOrderPage() {
             <select
               value={staffId}
               onChange={(e) => setStaffId(e.target.value)}
-              className="block w-full rounded-md border border-neutral-300 px-3 py-2 text-sm"
+              className="block w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
             >
               <option value="">請選擇...</option>
               {staffList.map((s) => (
@@ -363,7 +363,7 @@ export default function NewOrderPage() {
         </CardHeader>
         <CardContent>
           {serviceLines.length === 0 ? (
-            <p className="text-sm text-neutral-500">尚未加入服務項目</p>
+            <p className="text-sm text-muted-foreground">尚未加入服務項目</p>
           ) : (
             <Table>
               <TableHeader>
@@ -400,7 +400,7 @@ export default function NewOrderPage() {
                               unitPrice: 0,
                             });
                           }}
-                          className="rounded-md border border-neutral-300 px-2 py-1 text-sm"
+                          className="rounded-md border border-input bg-background px-2 py-1 text-sm"
                         >
                           <option value="">選擇類別</option>
                           {categories.map((c) => (
@@ -426,7 +426,7 @@ export default function NewOrderPage() {
                               unitPrice: 0,
                             });
                           }}
-                          className="rounded-md border border-neutral-300 px-2 py-1 text-sm"
+                          className="rounded-md border border-input bg-background px-2 py-1 text-sm"
                           disabled={!line.categoryId}
                         >
                           <option value="">選擇項目</option>
@@ -451,7 +451,7 @@ export default function NewOrderPage() {
                               unitPrice: v?.price ?? 0,
                             });
                           }}
-                          className="rounded-md border border-neutral-300 px-2 py-1 text-sm"
+                          className="rounded-md border border-input bg-background px-2 py-1 text-sm"
                           disabled={!line.itemId}
                         >
                           <option value="">選擇方案</option>
@@ -499,7 +499,7 @@ export default function NewOrderPage() {
         </CardHeader>
         <CardContent>
           {productLines.length === 0 ? (
-            <p className="text-sm text-neutral-500">尚未加入產品</p>
+            <p className="text-sm text-muted-foreground">尚未加入產品</p>
           ) : (
             <Table>
               <TableHeader>
@@ -526,7 +526,7 @@ export default function NewOrderPage() {
                             unitPrice: prod?.price ?? 0,
                           });
                         }}
-                        className="rounded-md border border-neutral-300 px-2 py-1 text-sm"
+                        className="rounded-md border border-input bg-background px-2 py-1 text-sm"
                       >
                         <option value="">選擇產品</option>
                         {products.map((p) => (
@@ -586,7 +586,7 @@ export default function NewOrderPage() {
               <select
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value)}
-                className="block w-full rounded-md border border-neutral-300 px-3 py-2 text-sm"
+                className="block w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
               >
                 <option value="CASH">現金</option>
                 <option value="TRANSFER">轉帳</option>
@@ -606,11 +606,11 @@ export default function NewOrderPage() {
           <Separator />
           <div className="space-y-1 text-sm">
             <div className="flex justify-between">
-              <span className="text-neutral-500">服務小計</span>
+              <span className="text-muted-foreground">服務小計</span>
               <span>${serviceSubtotal.toLocaleString()}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-neutral-500">產品小計</span>
+              <span className="text-muted-foreground">產品小計</span>
               <span>${productSubtotal.toLocaleString()}</span>
             </div>
             {discount > 0 && (

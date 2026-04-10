@@ -87,7 +87,7 @@ export function CustomerEditForm({ customer }: { customer: CustomerData }) {
             id="gender"
             value={form.gender}
             onChange={(e) => setForm({ ...form, gender: e.target.value })}
-            className="block w-full rounded-md border border-neutral-300 px-3 py-2 text-sm"
+            className="block w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
           >
             <option value="">未指定</option>
             <option value="M">男</option>

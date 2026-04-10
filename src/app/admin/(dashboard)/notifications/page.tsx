@@ -15,11 +15,11 @@ import {
 
 function notifStatusColor(status: string) {
   const map: Record<string, string> = {
-    PENDING: "bg-yellow-100 text-yellow-800",
-    SENT: "bg-green-100 text-green-800",
-    FAILED: "bg-red-100 text-red-800",
+    PENDING: "bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border border-yellow-500/30",
+    SENT: "bg-green-500/20 text-green-600 dark:text-green-400 border border-green-500/30",
+    FAILED: "bg-red-500/20 text-red-600 dark:text-red-400 border border-red-500/30",
   };
-  return map[status] ?? "bg-neutral-100 text-neutral-800";
+  return map[status] ?? "bg-neutral-500/20 text-neutral-600 dark:text-neutral-400";
 }
 
 const notifStatusLabel: Record<string, string> = {
@@ -54,7 +54,7 @@ export default async function NotificationsPage() {
             <TableBody>
               {logs.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center text-neutral-500 py-8">
+                  <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
                     尚無通知紀錄
                   </TableCell>
                 </TableRow>

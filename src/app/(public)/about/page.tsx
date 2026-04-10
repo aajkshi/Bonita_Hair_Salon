@@ -65,7 +65,7 @@ export default function AboutPage() {
         <h2 className="mb-6 text-2xl font-bold">設計師介紹</h2>
         <div className="rounded-lg border p-8">
           <div className="flex flex-col items-start gap-6 sm:flex-row">
-            <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-rose-100 text-3xl font-bold text-rose-500">
+            <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-rose-500/10 text-3xl font-bold text-rose-500">
               A
             </div>
             <div>
@@ -112,10 +112,10 @@ export default function AboutPage() {
         </div>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          <div className="flex h-48 items-center justify-center rounded-lg bg-gradient-to-br from-rose-50 to-pink-50 text-muted-foreground">
+          <div className="flex h-48 items-center justify-center rounded-lg bg-gradient-to-br from-rose-500/10 to-pink-500/10 text-muted-foreground">
             溫馨舒適的沙龍空間
           </div>
-          <div className="flex h-48 items-center justify-center rounded-lg bg-gradient-to-br from-pink-50 to-rose-50 text-muted-foreground">
+          <div className="flex h-48 items-center justify-center rounded-lg bg-gradient-to-br from-pink-500/10 to-rose-500/10 text-muted-foreground">
             專業的美髮設備
           </div>
         </div>

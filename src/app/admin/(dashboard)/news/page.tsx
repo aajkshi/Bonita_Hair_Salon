@@ -42,7 +42,7 @@ export default async function NewsPage() {
             <TableBody>
               {news.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center text-neutral-500 py-8">
+                  <TableCell colSpan={5} className="text-center text-muted-foreground py-8">
                     尚無消息
                   </TableCell>
                 </TableRow>
