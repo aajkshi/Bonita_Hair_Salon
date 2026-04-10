@@ -18,7 +18,8 @@
       "Bash(npx zeabur:*)",
       "WebFetch(domain:zeabur.com)",
       "Bash(npm run:*)",
-      "Bash(ls prisma.config.*)"
+      "Bash(ls prisma.config.*)",
+      "Bash(DATABASE_URL=file:./dev.db AUTH_SECRET=test sh scripts/build.sh)"
     ]
   }
 }
