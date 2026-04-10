@@ -15,7 +15,9 @@
       "Bash(powershell.exe -Command \"Get-Command zeabur -ErrorAction SilentlyContinue\")",
       "Bash(powershell.exe -Command \"irm https://get.zeabur.com | iex\")",
       "Bash(npm install:*)",
-      "Bash(npx zeabur:*)"
+      "Bash(npx zeabur:*)",
+      "WebFetch(domain:zeabur.com)",
+      "Bash(npm run:*)"
     ]
   }
 }
